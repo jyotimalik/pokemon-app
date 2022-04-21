@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokedexApi", "PokedexApp\PokedexApi.csproj", "{357B8C44-535B-4BFA-9610-393A008CD076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Libs", "Pokedex.Libs\Pokedex.Libs.csproj", "{C94E6788-9EA7-44AE-BEE7-756C4C3BA23A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{357B8C44-535B-4BFA-9610-393A008CD076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357B8C44-535B-4BFA-9610-393A008CD076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357B8C44-535B-4BFA-9610-393A008CD076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357B8C44-535B-4BFA-9610-393A008CD076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C94E6788-9EA7-44AE-BEE7-756C4C3BA23A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C94E6788-9EA7-44AE-BEE7-756C4C3BA23A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C94E6788-9EA7-44AE-BEE7-756C4C3BA23A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C94E6788-9EA7-44AE-BEE7-756C4C3BA23A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFF6D2CB-E92B-4CA7-B887-9283F232C19E}
+	EndGlobalSection
+EndGlobal
