@@ -6,16 +6,18 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Pokedex.Libs.Services
 {
     public class PokemonService : BaseClient, IPokemonService
     {
         private readonly HttpClient _client;
-
-        public PokemonService(IHttpClientFactory httpClientFactory)
+        private readonly ILogger<PokemonService> _logger;
+        public PokemonService(IHttpClientFactory httpClientFactory,ILogger<PokemonService> logger)
         {
             _client = httpClientFactory.CreateClient("PokemonApi");
+            _logger = logger;
         }
 
         public async Task<PokemonDto> GetPokemonBasicData(string name)
@@ -44,7 +46,7 @@ namespace Pokedex.Libs.Services
             catch (Exception ex)
             {
                 var errorMessage = "Error Getting Basic Pokemon Information " + ex.Message;
-                throw new Exception(errorMessage);
+                _logger.LogError(errorMessage);
             }
             return dto;
         }

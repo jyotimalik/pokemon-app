@@ -5,15 +5,18 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Pokedex.Libs.Services
 {
     public class YodaTranslationService : BaseClient, ITranslationService
     {
         private readonly HttpClient _client;
-        public YodaTranslationService(IHttpClientFactory httpClientFactory)
+        private readonly ILogger<YodaTranslationService> _logger;
+        public YodaTranslationService(IHttpClientFactory httpClientFactory, ILogger<YodaTranslationService> logger)
         {
             _client = httpClientFactory.CreateClient("YodaApi");
+            _logger = logger;
 
         }
 
@@ -35,7 +38,7 @@ namespace Pokedex.Libs.Services
             catch (Exception ex)
             {
                 var errorMessage = "Error Getting Yoda Translated Pokemon Information " + ex.Message;
-                throw new Exception(errorMessage);
+                _logger.LogError(errorMessage);
             }
 
             return description;

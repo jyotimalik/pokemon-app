@@ -5,15 +5,18 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Pokedex.Libs.Services
 {
     public class ShakespeareTranslationService : BaseClient, ITranslationService
     {
         private readonly HttpClient _client;
-        public ShakespeareTranslationService(IHttpClientFactory httpClientFactory)
+        private readonly ILogger<ShakespeareTranslationService> _logger;
+        public ShakespeareTranslationService(IHttpClientFactory httpClientFactory, ILogger<ShakespeareTranslationService> logger)
         {
             _client = httpClientFactory.CreateClient("ShakespeareApi");
+            _logger = logger;
 
         }
 
@@ -35,7 +38,7 @@ namespace Pokedex.Libs.Services
             catch (Exception ex)
             {
                 var errorMessage = "Error Getting Shakespeare Translated Pokemon Information " + ex.Message;
-                throw new Exception(errorMessage);
+                _logger.LogError(errorMessage);
             }
 
             return description;

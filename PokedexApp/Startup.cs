@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Pokedex.Libs.Services;
 using Pokedex.Libs.Services.Interfaces;
 
-namespace PokedexApp
+namespace PokedexApi
 {
     public class Startup
     {
