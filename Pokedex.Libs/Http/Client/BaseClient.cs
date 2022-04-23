@@ -21,7 +21,7 @@ namespace Pokedex.Libs.Http.Clients
             }
             catch (Exception ex)
             {
-                var errorMessage = "Error when sending request to api" + ex.Message;
+                var errorMessage = "Error when sending request to api " + requestMessage.RequestUri + " " + ex.InnerException;
                 throw new Exception(errorMessage);
             }
             return result;

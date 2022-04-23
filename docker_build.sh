@@ -1,0 +1,1 @@
+docker build -t pokedex -f PokedexApp/Dockerfile .

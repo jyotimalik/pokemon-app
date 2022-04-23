@@ -20,6 +20,12 @@ namespace Pokedex.Libs.Services
 
         }
 
+        /// <summary>
+        /// Get Yoda Translated Description by passing basic description
+        /// Calling Yoda api and returning translated response if getting not result then returning basic description
+        /// </summary>
+        /// <param name="description"></param>
+        /// <returns></returns>
         public async Task<string> GetPokemonWithTranslation(string description)
         {
             try

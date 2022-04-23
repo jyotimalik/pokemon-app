@@ -31,6 +31,8 @@ namespace PokedexApi.Controllers
             {
                 return new BadRequestObjectResult("Parameter pokemon name is not provided");
             }
+
+            // getting basic pokemon information by passing pokemon name
             var pokemonResult = await _pokemonService.GetPokemonBasicData(pokemonName);
             if (pokemonResult == null)
             {
@@ -53,11 +55,14 @@ namespace PokedexApi.Controllers
             {
                 return new BadRequestObjectResult("Parameter pokemon name is not provided");
             }
+            // Getting Basic Pokemon Info
             var pokemonBasicInfo = await _pokemonService.GetPokemonBasicData(pokemonName);
             if (pokemonBasicInfo == null)
             {
                 return new NotFoundObjectResult($"No Data Found for {pokemonName}");
             }
+
+            // Checking for Description and Calling Translation Service depending on condition if habitat is cave or islegendary true then calling yoda translation otherwise shakespeare
             if (!string.IsNullOrEmpty(pokemonBasicInfo.Description))
             {
                 ITranslationService service = _translationFactory.GetTranslationServiceObject(pokemonBasicInfo);

@@ -20,6 +20,12 @@ namespace Pokedex.Libs.Services
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get Pokemon Basic Information Data(Name, Description, Habitat, IsLegendary) by pokemon name
+        /// Calling Pokemon api and mapping return response in dto mapper
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public async Task<PokemonDto> GetPokemonBasicData(string name)
         {
             PokemonDto dto = default;

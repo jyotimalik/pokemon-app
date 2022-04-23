@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pokedex.Libs.Services;
 using Pokedex.Libs.Services.Interfaces;
+using PokedexApi.Middleware;
 
 namespace PokedexApi
 {
@@ -21,11 +23,21 @@ namespace PokedexApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string applicationEnv = Configuration["ApplicationEnvironment"];
             services.AddControllers();
             services.AddHttpClient();
-            services.AddHttpClient("PokemonApi", c => c.BaseAddress = new Uri("https://pokeapi.co/api/v2/pokemon-species/"));
-            services.AddHttpClient("YodaApi", c => c.BaseAddress = new Uri("https://api.funtranslations.com/translate/yoda.json"));
-            services.AddHttpClient("ShakespeareApi", c => c.BaseAddress = new Uri("https://api.funtranslations.com/translate/shakespeare.json"));
+            services.AddHttpClient("PokemonApi", c => c.BaseAddress = new Uri(Configuration[applicationEnv + ":pokemonApiUrl"])).ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            }); ;
+            services.AddHttpClient("YodaApi", c => c.BaseAddress = new Uri(Configuration[applicationEnv + ":yodaApiUrl"])).ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            }); ;
+            services.AddHttpClient("ShakespeareApi", c => c.BaseAddress = new Uri(Configuration[applicationEnv + ":shakespeareApiUrl"])).ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            }); ;
             services.AddSingleton<IPokemonService, PokemonService>();
             services.AddSingleton<ShakespeareTranslationService>();
             services.AddSingleton<YodaTranslationService>();
@@ -42,9 +54,9 @@ namespace PokedexApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
+           //custom exception middleware added
+            app.UseCustomExceptionMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
